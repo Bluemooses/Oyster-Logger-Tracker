@@ -13,7 +13,9 @@ function InputOyster(props) {
     console.log(coast);
   }
 
-  function addOyster() {
+  function addOyster(event) {
+    event.preventDefault();
+
     let oysterObject = {
       global_location: coast,
       name: oysterName,
@@ -21,6 +23,14 @@ function InputOyster(props) {
       geo_location: oysterLocation,
     };
     console.log(oysterObject);
+    if (
+      oysterObject.global_location === "" ||
+      oysterObject.name === "" ||
+      oysterObject.description === "" ||
+      oysterObject.geo_location === ""
+    ) {
+      alert("Fill the form fields please");
+    }
   }
 
   return (
