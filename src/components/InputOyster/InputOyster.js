@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Checkbox, Form, Radio } from "semantic-ui-react";
-import { func } from "prop-types";
 import { useDispatch } from "react-redux";
 
 function InputOyster(props) {

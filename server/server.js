@@ -11,6 +11,7 @@ const passport = require("./strategies/user.strategy");
 // Route includes
 const userRouter = require("./routes/user.router");
 const addOysterRouter = require("./routes/addOyster.router");
+const inventoryRouter = require("./routes/inventory.router");
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -28,6 +29,7 @@ app.use(fileUpload());
 /* Routes */
 app.use("/api/user", userRouter);
 app.use("/api/add-oyster", addOysterRouter);
+app.use("/api/inventory", inventoryRouter);
 
 // Serve static files
 app.use(express.static("build"));
