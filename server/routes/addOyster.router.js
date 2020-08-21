@@ -7,7 +7,18 @@ const {
 /**
  * GET route template
  */
-router.get("/", (req, res) => {});
+router.get("/", (req, res) => {
+  let queryText = `SELECT * FROM oyster_types ORDER BY name ASC;`;
+
+  pool
+    .query(queryText)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((error) => {
+      console.log("ERROR IN OYSTER GET", error);
+    });
+});
 
 /**
  * POST route template
