@@ -14,6 +14,21 @@ router.get("/", (req, res) => {});
  */
 router.post("/", rejectUnauthenticated, (req, res) => {
   console.log(req.body);
+  let globalLocation = req.body.global_location;
+  let name = req.body.name;
+  let description = req.body.description;
+  let geo_location = req.body.geo_location;
+
+  let queryText = `INSERT INTO oyster_types (global_location, name, description, geo_location) VALUES ($1, $2, $3, $4);`;
+
+  pool
+    .query(queryText, [globalLocation, name, description, geo_location])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 module.exports = router;
