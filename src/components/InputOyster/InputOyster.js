@@ -1,9 +1,9 @@
 import React from "react";
-
+import FileUpload from "../FileUpload/FileUpload";
 function InputOyster(props) {
   return (
     <div>
-      <p>aloha</p>
+      <FileUpload />
     </div>
   );
 }
