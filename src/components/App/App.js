@@ -17,6 +17,7 @@ import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
 import InputOyster from "../InputOyster/InputOyster";
+import OysterMap from "../OysterMap/OysterMap";
 
 import "./App.css";
 
@@ -38,6 +39,7 @@ const App = () => {
           {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
           <Route exact path="/about" component={AboutPage} />
+          <Route exact path="/oysters" component={OysterMap} />
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.

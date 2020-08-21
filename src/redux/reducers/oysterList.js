@@ -1,7 +1,12 @@
-import React from "react";
+const oysterList = (state = {}, action) => {
+  switch (action.type) {
+    case "SET_OYSTER_LIST":
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
-function OysterTable(props) {
-  return <div></div>;
-}
-
-export default OysterTable;
+// user will be on the redux state at:
+// state.user
+export default oysterList;
