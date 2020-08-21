@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Button, Checkbox, Form, Radio } from "semantic-ui-react";
 import { func } from "prop-types";
+import { useDispatch } from "react-redux";
 
 function InputOyster(props) {
   const [oysterName, setOysterName] = useState("");
   const [oysterLocation, setOysterLocation] = useState("");
   const [oysterDescription, setOysterDescription] = useState("");
   const [coast, setCoast] = useState("");
+  const dispatch = useDispatch();
 
   function handleRadio(event) {
     setCoast(event.target.value);
@@ -14,23 +16,21 @@ function InputOyster(props) {
   }
 
   function addOyster(event) {
-    event.preventDefault();
-
+    if (
+      oysterName === "" ||
+      oysterLocation === "" ||
+      oysterDescription === "" ||
+      coast === ""
+    ) {
+      alert("Fill the form fields please");
+    }
     let oysterObject = {
       global_location: coast,
       name: oysterName,
       description: oysterDescription,
       geo_location: oysterLocation,
     };
-    console.log(oysterObject);
-    if (
-      oysterObject.global_location === "" ||
-      oysterObject.name === "" ||
-      oysterObject.description === "" ||
-      oysterObject.geo_location === ""
-    ) {
-      alert("Fill the form fields please");
-    }
+    dispatch({ type: "ADD_OYSTER", payload: oysterObject });
   }
 
   return (
