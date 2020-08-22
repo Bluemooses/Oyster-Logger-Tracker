@@ -29,9 +29,9 @@ function* getOysters() {
   }
 }
 
-function* userSaga() {
+function* oysterSaga() {
   yield takeLatest("ADD_OYSTER", addOyster);
   yield takeLatest("GET_OYSTERS", getOysters);
 }
 
-export default userSaga;
+export default oysterSaga;

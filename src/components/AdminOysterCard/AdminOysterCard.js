@@ -19,6 +19,8 @@ import AdminInput from "../AdminInput/AdminInput";
 function OysterCard(props) {
   const dispatch = useDispatch();
 
+  const user = useSelector((redux) => redux.user);
+
   let oyster = props.oyster;
   const [open, setOpen] = useState(false);
   const [oysterCount, setOysterCount] = useState(0);
@@ -32,6 +34,7 @@ function OysterCard(props) {
       ship_date: date.toDateString(),
       current_count: oysterCount,
       oyster_name: oyster.name,
+      user_id: user.id,
     };
     console.log(date.getDate());
     console.log(date);
