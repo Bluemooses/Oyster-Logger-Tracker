@@ -1,9 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Button, Card, Image, Label, Grid } from "semantic-ui-react";
-import OysterCard from "../OysterCard/OysterCard";
-
-function OysterMap(props) {
+import AdminOysterCard from "../AdminOysterCard/AdminOysterCard";
+function AdminInventory(props) {
   const oysters = useSelector((redux) => redux.oysters);
 
   return (
@@ -12,7 +11,7 @@ function OysterMap(props) {
       {oysters.map((oyster) => {
         return (
           <Grid.Column>
-            <OysterCard oyster={oyster} />
+            <AdminOysterCard oyster={oyster} />
           </Grid.Column>
         );
       })}
@@ -20,4 +19,4 @@ function OysterMap(props) {
   );
 }
 
-export default OysterMap;
+export default AdminInventory;

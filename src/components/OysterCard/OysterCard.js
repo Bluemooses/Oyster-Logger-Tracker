@@ -6,9 +6,6 @@ import { useDispatch } from "react-redux";
 function OysterCard(props) {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: "GET_OYSTERS" });
-  });
   let oyster = props.oyster;
 
   return (

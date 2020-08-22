@@ -18,6 +18,7 @@ import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
 import InputOyster from "../InputOyster/InputOyster";
 import OysterMap from "../OysterMap/OysterMap";
+import AdminInventory from "../AdminInventory/AdminInventory";
 
 import "./App.css";
 
@@ -48,6 +49,11 @@ const App = () => {
           {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
           <ProtectedRoute exact path="/info" component={InfoPage} />
+          <ProtectedRoute
+            exact
+            path="/oyster-inventory"
+            component={AdminInventory}
+          />
           {/* If none of the other routes matched, we will show a 404. */}
           <Route render={() => <h1>404</h1>} />
         </Switch>
