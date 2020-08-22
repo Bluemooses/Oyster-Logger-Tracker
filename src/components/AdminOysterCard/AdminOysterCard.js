@@ -38,15 +38,15 @@ function OysterCard(props) {
           <Modal.Header>Add {oyster.name} to Inventory</Modal.Header>
           <Modal.Content image>
             <Modal.Description>
-              <AdminInput />
+              <AdminInput oyster={oyster} />
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
             <Button color="black" onClick={() => setOpen(false)}>
-              Nope
+              Cancel
             </Button>
             <Button
-              content="Yep, that's me"
+              content="Add to Inventory"
               labelPosition="right"
               icon="checkmark"
               onClick={() => setOpen(false)}
