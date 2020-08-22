@@ -15,6 +15,12 @@ function InputOyster(props) {
   }
 
   function addOyster(event) {
+    let oysterObject = {
+      global_location: coast,
+      name: oysterName,
+      description: oysterDescription,
+      geo_location: oysterLocation,
+    };
     if (
       oysterName === "" ||
       oysterLocation === "" ||
@@ -25,12 +31,6 @@ function InputOyster(props) {
     } else {
       dispatch({ type: "ADD_OYSTER", payload: oysterObject });
     }
-    let oysterObject = {
-      global_location: coast,
-      name: oysterName,
-      description: oysterDescription,
-      geo_location: oysterLocation,
-    };
   }
 
   return (
