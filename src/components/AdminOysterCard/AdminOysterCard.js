@@ -23,13 +23,21 @@ function OysterCard(props) {
   const [open, setOpen] = useState(false);
   const [oysterCount, setOysterCount] = useState(0);
   const [date, setDate] = useState(new Date());
+
   const handleCalendarClose = () => console.log("Calendar closed");
   const handleCalendarOpen = () => console.log("Calendar opened");
 
   function addOyster(oyster) {
+    let oysterObject = {
+      ship_date: date.toDateString(),
+      current_count: oysterCount,
+      oyster_name: oyster.name,
+    };
+    console.log(date.getDate());
     console.log(date);
     console.log(oysterCount);
     console.log(oyster.name);
+    dispatch({ type: "ADD_TO_INVENTORY", payload: oysterObject });
     setOpen(false);
   }
 
