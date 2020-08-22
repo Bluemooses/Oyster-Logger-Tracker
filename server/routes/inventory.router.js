@@ -5,11 +5,15 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get("/", (req, res) => {});
+router.get("/", (req, res) => {
+  console.log(req.body);
+});
 
 /**
  * POST route template
  */
-router.post("/", (req, res) => {});
+router.post("/", (req, res) => {
+    console.log(req.body);
+});
 
 module.exports = router;

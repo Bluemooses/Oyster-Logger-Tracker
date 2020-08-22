@@ -3,6 +3,7 @@ import loginSaga from "./loginSaga";
 import registrationSaga from "./registrationSaga";
 import userSaga from "./userSaga";
 import addOysterSaga from "./addOysterSaga";
+import oysterInventory from "./adminOysters";
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -12,5 +13,11 @@ import addOysterSaga from "./addOysterSaga";
 // the registration triggers a login
 // and login triggers setting the user
 export default function* rootSaga() {
-  yield all([loginSaga(), registrationSaga(), userSaga(), addOysterSaga()]);
+  yield all([
+    loginSaga(),
+    registrationSaga(),
+    userSaga(),
+    addOysterSaga(),
+    oysterInventory(),
+  ]);
 }
