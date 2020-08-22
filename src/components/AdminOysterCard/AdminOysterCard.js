@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useSelector } from "react-redux";
 import {
   Button,
@@ -8,6 +10,8 @@ import {
   Grid,
   Modal,
   Header,
+  Form,
+  Input,
 } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import AdminInput from "../AdminInput/AdminInput";
@@ -17,6 +21,17 @@ function OysterCard(props) {
 
   let oyster = props.oyster;
   const [open, setOpen] = useState(false);
+  const [oysterCount, setOysterCount] = useState(0);
+  const [date, setDate] = useState(new Date());
+  const handleCalendarClose = () => console.log("Calendar closed");
+  const handleCalendarOpen = () => console.log("Calendar opened");
+
+  function addOyster(oyster) {
+    console.log(date);
+    console.log(oysterCount);
+    console.log(oyster.name);
+    setOpen(false);
+  }
 
   return (
     <Card key={oyster.id}>
@@ -38,7 +53,28 @@ function OysterCard(props) {
           <Modal.Header>Add {oyster.name} to Inventory</Modal.Header>
           <Modal.Content image>
             <Modal.Description>
-              <AdminInput oyster={oyster} />
+              <Form onSubmit={addOyster}>
+                <Form.Field>
+                  <Label>Shipping Date</Label>
+                  <DatePicker
+                    selected={date}
+                    onChange={(date) => setDate(date)}
+                    onCalendarClose={handleCalendarClose}
+                    onCalendarOpen={handleCalendarOpen}
+                    value={date}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Label>How Many</Label>
+                  <Input
+                    type="number"
+                    placeholder="0"
+                    onChange={(e) => {
+                      setOysterCount(e.target.value);
+                    }}
+                  />
+                </Form.Field>
+              </Form>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
@@ -49,7 +85,7 @@ function OysterCard(props) {
               content="Add to Inventory"
               labelPosition="right"
               icon="checkmark"
-              onClick={() => setOpen(false)}
+              onClick={() => addOyster(oyster)}
               positive
             />
           </Modal.Actions>

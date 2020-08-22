@@ -29,8 +29,6 @@ function AdminInput(props) {
           value={date}
         />
       </Form.Field>
-
-      <Button type="submit">Add Oyster</Button>
     </Form>
   );
 }
