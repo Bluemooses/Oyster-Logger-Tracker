@@ -10,6 +10,7 @@ import {
   Header,
 } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
+import AdminInput from "../AdminInput/AdminInput";
 
 function OysterCard(props) {
   const dispatch = useDispatch();
@@ -37,12 +38,7 @@ function OysterCard(props) {
           <Modal.Header>Add {oyster.name} to Inventory</Modal.Header>
           <Modal.Content image>
             <Modal.Description>
-              <Header>Default Profile Image</Header>
-              <p>
-                We've found the following gravatar image associated with your
-                e-mail address.
-              </p>
-              <p>Is it okay to use this photo?</p>
+              <AdminInput />
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>

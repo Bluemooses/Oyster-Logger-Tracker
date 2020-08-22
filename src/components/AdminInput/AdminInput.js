@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Button, Checkbox, Form, Radio } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function AdminInput(props) {
+  const dispatch = useDispatch();
+
   const [oysterName, setOysterName] = useState("");
   const [oysterLocation, setOysterLocation] = useState("");
   const [oysterDescription, setOysterDescription] = useState("");
   const [coast, setCoast] = useState("");
-  const dispatch = useDispatch();
+  const [date, setDate] = useState(new Date());
+  const handleCalendarClose = () => console.log("Calendar closed");
+  const handleCalendarOpen = () => console.log("Calendar opened");
 
   function handleRadio(event) {
     setCoast(event.target.value);
@@ -34,6 +40,15 @@ function AdminInput(props) {
 
   return (
     <Form onSubmit={addOyster}>
+      <Form.Field>
+        <DatePicker
+          selected={date}
+          onChange={(date) => setDate(date)}
+          onCalendarClose={handleCalendarClose}
+          onCalendarOpen={handleCalendarOpen}
+          value={date}
+        />
+      </Form.Field>
       <Form.Field>
         <label>Oyster Name</label>
         <input

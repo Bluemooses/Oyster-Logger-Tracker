@@ -21,7 +21,9 @@ function InputOyster(props) {
       oysterDescription === "" ||
       coast === ""
     ) {
-      alert("Fill the form fields please");
+      return alert("Fill the form fields please");
+    } else {
+      dispatch({ type: "ADD_OYSTER", payload: oysterObject });
     }
     let oysterObject = {
       global_location: coast,
@@ -29,7 +31,6 @@ function InputOyster(props) {
       description: oysterDescription,
       geo_location: oysterLocation,
     };
-    dispatch({ type: "ADD_OYSTER", payload: oysterObject });
   }
 
   return (
