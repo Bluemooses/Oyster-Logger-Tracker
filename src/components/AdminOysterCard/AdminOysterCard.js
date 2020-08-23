@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from "react";
+import "../AdminOysterCard/AdminOysterCard.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSelector } from "react-redux";
-import {
-  Button,
-  Card,
-  Image,
-  Label,
-  Grid,
-  Modal,
-  Header,
-  Form,
-  Input,
-} from "semantic-ui-react";
+import { Button, Card, Label, Modal, Form, Input } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import AdminInput from "../AdminInput/AdminInput";
 
@@ -36,10 +27,7 @@ function OysterCard(props) {
       oyster_name: oyster.name,
       user_id: user.id,
     };
-    console.log(date.getDate());
-    console.log(date);
-    console.log(oysterCount);
-    console.log(oyster.name);
+
     dispatch({ type: "ADD_TO_INVENTORY", payload: oysterObject });
     setOpen(false);
   }
@@ -61,7 +49,9 @@ function OysterCard(props) {
           open={open}
           trigger={<Button>Add to Inventory</Button>}
         >
-          <Modal.Header>Add {oyster.name} to Inventory</Modal.Header>
+          <Modal.Header>
+            Add <span className="oysterName">{oyster.name}</span> to Inventory
+          </Modal.Header>
           <Modal.Content image>
             <Modal.Description>
               <Form onSubmit={addOyster}>
