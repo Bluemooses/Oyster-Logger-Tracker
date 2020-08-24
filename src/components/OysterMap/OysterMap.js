@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Card, Image, Label, Grid } from "semantic-ui-react";
 import OysterCard from "../OysterCard/OysterCard";
 
-function OysterMap(props) {
+export default function OysterMap(props) {
   console.log(props);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,5 +24,3 @@ function OysterMap(props) {
     </Grid>
   );
 }
-
-export default OysterMap;
