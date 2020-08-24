@@ -17,7 +17,7 @@ import OysterMap from "../OysterMap/OysterMap";
 import AdminInventory from "../AdminInventory/AdminInventory";
 
 import "./App.css";
-import LandingPage from "../../LandingPage/LandingPage";
+import LandingPage from "../LandingPage/LandingPage";
 
 const App = () => {
   const dispatch = useDispatch();
