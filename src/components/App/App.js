@@ -6,7 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
@@ -21,6 +21,7 @@ import OysterMap from "../OysterMap/OysterMap";
 import AdminInventory from "../AdminInventory/AdminInventory";
 
 import "./App.css";
+import LandingPage from "../../LandingPage/LandingPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const App = () => {
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
     dispatch({ type: "GET_OYSTERS" });
-  });
+  }, []);
 
   return (
     <Router>
@@ -45,7 +46,7 @@ const App = () => {
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
-          <ProtectedRoute exact path="/home" component={InputOyster} />
+          <ProtectedRoute exact path="/home" component={LandingPage} />
           {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
           <ProtectedRoute exact path="/info" component={InfoPage} />

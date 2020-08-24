@@ -1,6 +1,6 @@
-const oysterList = (state = [{}], action) => {
+const inventoryList = (state = {}, action) => {
   switch (action.type) {
-    case "SET_OYSTER_LIST":
+    case "SET_INVENTORY":
       return action.payload;
     default:
       return state;
@@ -9,4 +9,4 @@ const oysterList = (state = [{}], action) => {
 
 // user will be on the redux state at:
 // state.user
-export default oysterList;
+export default inventoryList;

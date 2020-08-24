@@ -1,16 +1,10 @@
-import React, { useState, } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const LoginPage = () => {
-
-
   const dispatch = useDispatch();
-  const errors = useSelector((redux) => redux.errors)
-  const [user, setUser] = useState({ username: '', password: '' })
-  // state = {
-  //   username: '',
-  //   password: '',
-  // };
+  const errors = useSelector((redux) => redux.errors);
+  const [user, setUser] = useState({ username: "", password: "" });
 
   const login = (event) => {
     event.preventDefault();
@@ -18,32 +12,30 @@ const LoginPage = () => {
 
     if (username && password) {
       dispatch({
-        type: 'LOGIN',
+        type: "LOGIN",
         payload: {
           username,
-          password
+          password,
         },
       });
+      dispatch({ type: "GET_OYSTERS" });
     } else {
-      dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
-  } // end login
+  }; // end login
 
-  const handleInputChangeFor = propertyName => (event) => {
-    console.log(propertyName)
+  const handleInputChangeFor = (propertyName) => (event) => {
+    console.log(propertyName);
     setUser({
       ...user,
       [propertyName]: event.target.value,
     });
-  }
+  };
 
   return (
     <div>
       {errors.loginMessage && (
-        <h2
-          className="alert"
-          role="alert"
-        >
+        <h2 className="alert" role="alert">
           {errors.loginMessage}
         </h2>
       )}
@@ -52,22 +44,22 @@ const LoginPage = () => {
         <div>
           <label htmlFor="username">
             Username:
-              <input
+            <input
               type="text"
               name="username"
               value={user.username}
-              onChange={handleInputChangeFor('username')}
+              onChange={handleInputChangeFor("username")}
             />
           </label>
         </div>
         <div>
           <label htmlFor="password">
             Password:
-              <input
+            <input
               type="password"
               name="password"
               value={user.password}
-              onChange={handleInputChangeFor('password')}
+              onChange={handleInputChangeFor("password")}
             />
           </label>
         </div>
@@ -84,13 +76,15 @@ const LoginPage = () => {
         <button
           type="button"
           className="link-button"
-          onClick={() => { dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
+          onClick={() => {
+            dispatch({ type: "SET_TO_REGISTER_MODE" });
+          }}
         >
           Register
-          </button>
+        </button>
       </center>
     </div>
   );
-}
+};
 
 export default LoginPage;

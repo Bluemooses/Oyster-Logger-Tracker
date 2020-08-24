@@ -6,11 +6,14 @@ const router = express.Router();
  * GET route template
  */
 router.get("/", (req, res) => {
+  let userId = req.user.id;
+  console.log(req.user.id);
   let queryText = `SELECT * FROM inventory WHERE user_id=$1 ORDER BY oyster_name ASC;`;
 
   pool
-    .query(queryText)
+    .query(queryText, [userId])
     .then((result) => {
+      console.log();
       res.send(result.rows);
     })
     .catch((error) => {
