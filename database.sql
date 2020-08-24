@@ -27,6 +27,7 @@ CREATE TABLE "inventory" (
 	"id" serial NOT NULL,
 	"ship_date" DATE,
 	"last_date_used" DATE,
+	"original_count" integer NOT NULL,
 	"previous_count" integer NOT NULL,
 	"current_count" integer NOT NULL,
 	"oyster_name" varchar(255) NOT NULL,

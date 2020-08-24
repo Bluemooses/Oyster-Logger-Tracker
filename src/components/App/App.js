@@ -18,6 +18,8 @@ import AdminInventory from "../AdminInventory/AdminInventory";
 
 import "./App.css";
 import LandingPage from "../LandingPage/LandingPage";
+import OysterTable from "../OysterTable/OysterTable";
+import CurrentInventory from "../CurrentInventory/CurrentInventory";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -56,6 +58,11 @@ const App = () => {
             exact
             path="/oyster-inventory"
             component={AdminInventory}
+          />
+          <ProtectedRoute
+            exact
+            path="/my-inventory"
+            component={CurrentInventory}
           />
           {/* If none of the other routes matched, we will show a 404. */}
           <Route render={() => <h1>404</h1>} />
