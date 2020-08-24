@@ -1,7 +1,12 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Icon, Table, Tab } from "semantic-ui-react";
 function OysterTable(props) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "GET_OYSTER_INVENTORY" });
+  }, []);
   const inventory = useSelector((redux) => redux.inventory);
 
   return (
@@ -15,7 +20,13 @@ function OysterTable(props) {
         <Table.HeaderCell>Count</Table.HeaderCell>
       </Table.Header>
       <Table.Body>
-        <Table.Row></Table.Row>
+        {inventory.map((inv) => {
+          return (
+            <Table.Row>
+              <Table.Cell>{inv.oyster_name}</Table.Cell>
+            </Table.Row>
+          );
+        })}
       </Table.Body>
     </Table>
   );

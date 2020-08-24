@@ -33,7 +33,7 @@ router.post("/", (req, res) => {
   let user_id = req.body.user_id;
   let original_count = req.body.current_count;
 
-  let queryText = `INSERT INTO inventory (ship_date, previous_count, current_count, oyster_name, user_id) VALUES ($1, $2, $3, $4, $5, $6);`;
+  let queryText = `INSERT INTO inventory (ship_date, previous_count, current_count, oyster_name, original_count, user_id) VALUES ($1, $2, $3, $4, $5, $6);`;
 
   pool
     .query(queryText, [
