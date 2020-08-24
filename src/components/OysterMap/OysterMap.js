@@ -8,7 +8,7 @@ function OysterMap(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: "GET_OYSTER_INVENTORY" });
-  });
+  }, []);
   const oysters = useSelector((redux) => redux.oysters);
 
   return (
