@@ -17,7 +17,7 @@ function OysterTable(props) {
         <Table.HeaderCell>Received Date</Table.HeaderCell>
         <Table.HeaderCell>Ship Date</Table.HeaderCell>
         <Table.HeaderCell>Last Date Used</Table.HeaderCell>
-        <Table.HeaderCell>Original Count</Table.HeaderCell>
+        <Table.HeaderCell>Case Size</Table.HeaderCell>
         <Table.HeaderCell>Count</Table.HeaderCell>
       </Table.Header>
 
@@ -27,12 +27,23 @@ function OysterTable(props) {
         let curr_month = d.getMonth() + 1;
         let curr_year = d.getFullYear();
         console.log(curr_month, "/", curr_date, "/", curr_year);
+        let rd = new Date(inv.received_date);
+        let rd_date = rd.getDate();
+        let rd_month = rd.getMonth() + 1;
+        let rd_year = rd.getFullYear();
 
         return (
           <Table.Body>
             <Table.Row>
               <Table.Cell>{inv.oyster_name}</Table.Cell>
-              <Table.Cell>{inv.received_date}</Table.Cell>
+              {rd_month === NaN ? (
+                <Table.Cell>
+                  {rd_month}/{rd_date}/{rd_year}
+                </Table.Cell>
+              ) : (
+                <Table.Cell></Table.Cell>
+              )}
+
               <Table.Cell>
                 {curr_month}/{curr_date}/{curr_year}
               </Table.Cell>
