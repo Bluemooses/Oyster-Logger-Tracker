@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import "./OysterTable.css";
 import { Icon, Table, Tab } from "semantic-ui-react";
 function OysterTable(props) {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ function OysterTable(props) {
   const inventory = useSelector((redux) => redux.inventory);
 
   return (
-    <Table>
+    <Table id="oysterAdminTable">
       <Table.Header>
         <Table.HeaderCell>Oyster Name</Table.HeaderCell>
         <Table.HeaderCell>Received Date</Table.HeaderCell>

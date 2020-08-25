@@ -27,17 +27,19 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   console.log(req.body);
   let ship_date = req.body.ship_date;
+  let received_date = req.body.received_date;
   let current_count = req.body.current_count;
   let oyster_name = req.body.oyster_name;
   let previous_count = req.body.current_count;
   let user_id = req.body.user_id;
   let original_count = req.body.current_count;
 
-  let queryText = `INSERT INTO inventory (ship_date, previous_count, current_count, oyster_name, original_count, user_id) VALUES ($1, $2, $3, $4, $5, $6);`;
+  let queryText = `INSERT INTO inventory (ship_date, received_date, previous_count, current_count, oyster_name, original_count, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7);`;
 
   pool
     .query(queryText, [
       ship_date,
+      received_date,
       previous_count,
       current_count,
       oyster_name,

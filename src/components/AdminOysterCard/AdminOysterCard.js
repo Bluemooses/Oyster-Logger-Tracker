@@ -27,6 +27,7 @@ function OysterCard(props) {
     console.log(date.toLocaleString);
     let oysterObject = {
       ship_date: date.toUTCString(),
+      received_date: receivedDate.toUTCString(),
       current_count: oysterCount,
       oyster_name: oyster.name,
       user_id: user.id,
