@@ -16,13 +16,17 @@ function OysterCard(props) {
   const [open, setOpen] = useState(false);
   const [oysterCount, setOysterCount] = useState(0);
   const [date, setDate] = useState(new Date());
+  const [receivedDate, setReceivedDate] = useState(new Date());
 
   const handleCalendarClose = () => console.log("Calendar closed");
   const handleCalendarOpen = () => console.log("Calendar opened");
 
   function addOyster(oyster) {
+    console.log(date.toUTCString);
+    console.log(date.toISOString);
+    console.log(date.toLocaleString);
     let oysterObject = {
-      ship_date: date.toDateString(),
+      ship_date: date.toUTCString(),
       current_count: oysterCount,
       oyster_name: oyster.name,
       user_id: user.id,
@@ -63,6 +67,16 @@ function OysterCard(props) {
                     onCalendarClose={handleCalendarClose}
                     onCalendarOpen={handleCalendarOpen}
                     value={date}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Label>Received Date</Label>
+                  <DatePicker
+                    selected={receivedDate}
+                    onChange={(receivedDate) => setReceivedDate(receivedDate)}
+                    onCalendarClose={handleCalendarClose}
+                    onCalendarOpen={handleCalendarOpen}
+                    value={receivedDate}
                   />
                 </Form.Field>
 
