@@ -20,6 +20,32 @@ function OysterTable(props) {
     dispatch({ type: "GET_OYSTER_INVENTORY" });
   }, []);
 
+  function editTable(inv) {
+    let originalCount = inv.original_count;
+    let soldCount = inv.sold;
+    let currentCount = inv.current_count;
+    let actualYield = originalCount - soldCount;
+    let waste = actualYield - currentCount;
+    console.log(waste);
+    let wasteObject = {
+      waste: waste,
+      oyster_name: inv.oyster_name,
+      ship_date: inv.ship_date,
+      last_date_used: inv.last_date_used,
+      id: inv.id,
+      actualYield: actualYield,
+      original_count: inv.original_count,
+    };
+
+    //table needs user_id but we can pass that along with config
+    if (waste < 0) {
+      dispatch({ type: "ROLL_OVER_WASTE", payload: wasteObject });
+      /////server logic handles UPDATE SET inventory
+    } else {
+      dispatch({ type: "LOG_OYSTER", payload: wasteObject });
+    }
+  }
+
   function editTableItem(inv) {
     setEditing(!editing);
     console.log(editing);
@@ -68,11 +94,12 @@ function OysterTable(props) {
                   value={date}
                 />
               </Table.Cell>
+
               <Table.Cell>{inv.original_count}</Table.Cell>
               <Table.Cell>{inv.current_count}</Table.Cell>
               <Table.Cell>{inv.sold}</Table.Cell>
               <Table.Cell>
-                <Button onClick={() => editTableItem(inv)}>Edit</Button>
+                <Button onClick={() => editTable(inv)}>Edit</Button>
               </Table.Cell>
             </Table.Row>
           </Table.Body>
