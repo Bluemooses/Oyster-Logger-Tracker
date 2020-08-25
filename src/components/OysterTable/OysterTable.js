@@ -1,15 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./OysterTable.css";
-import { Icon, Table, Tab } from "semantic-ui-react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+import { Icon, Table, Tab, TableHeaderCell, Button } from "semantic-ui-react";
+
 function OysterTable(props) {
+  //constants
   const dispatch = useDispatch();
-  const parse = require("postgres-date");
+  const [editing, setEditing] = useState(false);
+  const inventory = useSelector((redux) => redux.inventory);
+  const [date, setDate] = useState(new Date());
+  const handleCalendarClose = () => console.log("Calendar closed");
+
+  const handleCalendarOpen = () => console.log("Calendar opened");
 
   useEffect(() => {
     dispatch({ type: "GET_OYSTER_INVENTORY" });
   }, []);
-  const inventory = useSelector((redux) => redux.inventory);
+
+  function editTableItem(inv) {
+    setEditing(!editing);
+    console.log(editing);
+    console.log(inv);
+  }
 
   return (
     <Table id="oysterAdminTable">
@@ -20,6 +35,8 @@ function OysterTable(props) {
         <Table.HeaderCell>Last Date Used</Table.HeaderCell>
         <Table.HeaderCell>Case Size</Table.HeaderCell>
         <Table.HeaderCell>Count</Table.HeaderCell>
+        <Table.HeaderCell>Sold</Table.HeaderCell>
+        <Table.HeaderCell>Edit</Table.HeaderCell>
       </Table.Header>
 
       {inventory.map((inv) => {
@@ -27,7 +44,6 @@ function OysterTable(props) {
         let curr_date = d.getDate();
         let curr_month = d.getMonth() + 1;
         let curr_year = d.getFullYear();
-        console.log(curr_month, "/", curr_date, "/", curr_year);
         let rd = new Date(inv.received_date);
         let rd_date = rd.getDate();
         let rd_month = rd.getMonth() + 1;
@@ -37,20 +53,27 @@ function OysterTable(props) {
           <Table.Body>
             <Table.Row>
               <Table.Cell>{inv.oyster_name}</Table.Cell>
-              {rd_month === NaN ? (
-                <Table.Cell>
-                  {rd_month}/{rd_date}/{rd_year}
-                </Table.Cell>
-              ) : (
-                <Table.Cell></Table.Cell>
-              )}
-
+              <Table.Cell>
+                {rd_month}/{rd_date}/{rd_year}
+              </Table.Cell>
               <Table.Cell>
                 {curr_month}/{curr_date}/{curr_year}
               </Table.Cell>
-              <Table.Cell>{inv.last_date_used}</Table.Cell>
+              <Table.Cell>
+                <DatePicker
+                  selected={date}
+                  onChange={(date) => setDate(date)}
+                  onCalendarClose={handleCalendarClose}
+                  onCalendarOpen={handleCalendarOpen}
+                  value={date}
+                />
+              </Table.Cell>
               <Table.Cell>{inv.original_count}</Table.Cell>
               <Table.Cell>{inv.current_count}</Table.Cell>
+              <Table.Cell>{inv.sold}</Table.Cell>
+              <Table.Cell>
+                <Button onClick={() => editTableItem(inv)}>Edit</Button>
+              </Table.Cell>
             </Table.Row>
           </Table.Body>
         );
