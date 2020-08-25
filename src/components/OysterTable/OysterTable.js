@@ -53,16 +53,15 @@ function OysterTable(props) {
   }
 
   return (
-    <Table id="oysterAdminTable">
+    <Table stackable id="oysterAdminTable">
       <Table.Header>
         <Table.HeaderCell>Oyster Name</Table.HeaderCell>
         <Table.HeaderCell>Received Date</Table.HeaderCell>
         <Table.HeaderCell>Ship Date</Table.HeaderCell>
-        <Table.HeaderCell>Last Date Used</Table.HeaderCell>
         <Table.HeaderCell>Case Size</Table.HeaderCell>
         <Table.HeaderCell>Count</Table.HeaderCell>
         <Table.HeaderCell>Sold</Table.HeaderCell>
-        <Table.HeaderCell>Edit</Table.HeaderCell>
+        {/* <Table.HeaderCell>Edit</Table.HeaderCell> */}
       </Table.Header>
 
       {inventory.map((inv) => {
@@ -85,21 +84,21 @@ function OysterTable(props) {
               <Table.Cell>
                 {curr_month}/{curr_date}/{curr_year}
               </Table.Cell>
-              <Table.Cell>
+              {/* <Table.Cell>
                 <DatePicker
-                  selected={date}
+                  selected={inv.last_date_used}
                   onChange={(date) => setDate(date)}
                   onCalendarClose={handleCalendarClose}
                   onCalendarOpen={handleCalendarOpen}
-                  value={date}
+                  value={inv.last_date_used}
                 />
-              </Table.Cell>
+              </Table.Cell> */}
 
               <Table.Cell>{inv.original_count}</Table.Cell>
               <Table.Cell>{inv.current_count}</Table.Cell>
               <Table.Cell>{inv.sold}</Table.Cell>
-              <Table.Cell>
-                <Button onClick={() => editTable(inv)}>Edit</Button>
+              <Table.Cell collapsing>
+                <Button onClick={() => editTableItem(inv)}>Edit</Button>
               </Table.Cell>
             </Table.Row>
           </Table.Body>
