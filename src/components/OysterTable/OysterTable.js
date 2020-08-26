@@ -5,28 +5,28 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { Icon, Table, Tab, TableHeaderCell, Button } from "semantic-ui-react";
+import OysterModal from "./OysterModal";
 
 function OysterTable(props) {
   //constants
   const dispatch = useDispatch();
-  const [editing, setEditing] = useState(false);
+  const [open, setOpen] = useState(false);
   const inventory = useSelector((redux) => redux.inventory);
   const [date, setDate] = useState(new Date());
-  const handleCalendarClose = () => console.log("Calendar closed");
-
-  const handleCalendarOpen = () => console.log("Calendar opened");
 
   useEffect(() => {
     dispatch({ type: "GET_OYSTER_INVENTORY" });
   }, []);
 
-  function editTable(inv) {
+  function finalOysterSubmit(inv) {
     let originalCount = inv.original_count;
     let soldCount = inv.sold;
     let currentCount = inv.current_count;
     let actualYield = originalCount - soldCount;
     let waste = actualYield - currentCount;
     console.log(waste);
+    
+
     let wasteObject = {
       waste: waste,
       oyster_name: inv.oyster_name,
@@ -46,12 +46,6 @@ function OysterTable(props) {
     }
   }
 
-  function editTableItem(inv) {
-    setEditing(!editing);
-    console.log(editing);
-    console.log(inv);
-  }
-
   return (
     <Table stackable id="oysterAdminTable">
       <Table.Header>
@@ -65,15 +59,19 @@ function OysterTable(props) {
       </Table.Header>
 
       {inventory.map((inv) => {
+        //handle ship date
         let d = new Date(inv.ship_date);
         let curr_date = d.getDate();
         let curr_month = d.getMonth() + 1;
         let curr_year = d.getFullYear();
+
+        //handle received datea
         let rd = new Date(inv.received_date);
         let rd_date = rd.getDate();
         let rd_month = rd.getMonth() + 1;
         let rd_year = rd.getFullYear();
 
+        //begin render
         return (
           <Table.Body>
             <Table.Row>
@@ -84,28 +82,28 @@ function OysterTable(props) {
               <Table.Cell>
                 {curr_month}/{curr_date}/{curr_year}
               </Table.Cell>
-              {/* <Table.Cell>
-                <DatePicker
-                  selected={inv.last_date_used}
-                  onChange={(date) => setDate(date)}
-                  onCalendarClose={handleCalendarClose}
-                  onCalendarOpen={handleCalendarOpen}
-                  value={inv.last_date_used}
-                />
-              </Table.Cell> */}
 
               <Table.Cell>{inv.original_count}</Table.Cell>
               <Table.Cell>{inv.current_count}</Table.Cell>
               <Table.Cell>{inv.sold}</Table.Cell>
               <Table.Cell collapsing>
-                <Button onClick={() => editTableItem(inv)}>Edit</Button>
+                <OysterModal
+                  rd_month={rd_month}
+                  rd_date={rd_date}
+                  rd_year={rd_year}
+                  curr_month={curr_month}
+                  curr_date={curr_date}
+                  curr_year={curr_year}
+                  finalOysterSubmit={finalOysterSubmit}
+                  inv={inv}
+                ></OysterModal>
               </Table.Cell>
             </Table.Row>
           </Table.Body>
         );
       })}
     </Table>
-  );
-}
+  ); //end render
+} //end OysterTable
 
 export default OysterTable;
