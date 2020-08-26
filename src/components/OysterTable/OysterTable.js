@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./OysterTable.css";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { Icon, Table, Tab, TableHeaderCell, Button } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 import OysterModal from "./OysterModal";
 
 function OysterTable(props) {
   //constants
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
   const inventory = useSelector((redux) => redux.inventory);
-  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     dispatch({ type: "GET_OYSTER_INVENTORY" });
@@ -25,7 +22,6 @@ function OysterTable(props) {
     let actualYield = originalCount - soldCount;
     let waste = actualYield - currentCount;
     console.log(waste);
-    
 
     let wasteObject = {
       waste: waste,
@@ -35,6 +31,7 @@ function OysterTable(props) {
       id: inv.id,
       actualYield: actualYield,
       original_count: inv.original_count,
+      received_date: inv.received_date,
     };
 
     //table needs user_id but we can pass that along with config

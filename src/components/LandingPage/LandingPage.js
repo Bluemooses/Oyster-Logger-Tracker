@@ -1,20 +1,8 @@
-import React, { useEffect, useState, useDebugValue } from "react";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Image,
-  Message,
-  Segment,
-  Container,
-} from "semantic-ui-react";
-import "./LandingPage.css";
-import { useDispatch } from "react-redux";
-import OysterMap from "../OysterMap/OysterMap";
-import AdminInventory from "../AdminInventory/AdminInventory";
-
+import React from "react";
 import { useHistory } from "react-router-dom";
+
+import { Button, Header, Segment, Container } from "semantic-ui-react";
+import "./LandingPage.css";
 
 export default function LandingPage(props) {
   let history = useHistory();

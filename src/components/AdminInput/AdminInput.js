@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Button, Checkbox, Form, Radio } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function AdminInput(props) {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log(props.oyster);
-  });
   const [date, setDate] = useState(new Date());
+
   const handleCalendarClose = () => console.log("Calendar closed");
   const handleCalendarOpen = () => console.log("Calendar opened");
 

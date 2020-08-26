@@ -5,7 +5,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useSelector } from "react-redux";
 import { Button, Card, Label, Modal, Form, Input } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
-import AdminInput from "../AdminInput/AdminInput";
 
 function OysterCard(props) {
   const dispatch = useDispatch();

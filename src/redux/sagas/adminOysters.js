@@ -31,9 +31,31 @@ function* getOysterInventory() {
   }
 }
 
+function* updateOysterCount(action) {
+  try {
+    console.log(action.payload);
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    let id = action.payload.oysterId;
+    const response = yield axios.put(
+      `/api/inventory/update-count/${id}`,
+      config,
+      action.payload
+    );
+    console.log(response.data);
+    yield put({ type: "GET_OYSTER_INVENTORY" });
+    // yield put({ type: "SET_OYSTER_LIST", payload: response.data });
+  } catch (error) {
+    console.log("GET OYSTER CLIENT ERR", error);
+  }
+}
+
 function* oysterInventory() {
   yield takeLatest("ADD_TO_INVENTORY", addToInventory);
   yield takeLatest("GET_OYSTER_INVENTORY", getOysterInventory);
+  yield takeLatest("UPDATE_COUNT", updateOysterCount);
 }
 
 export default oysterInventory;
