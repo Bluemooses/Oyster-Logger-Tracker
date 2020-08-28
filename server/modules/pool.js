@@ -6,20 +6,34 @@ let dbPassword = process.env.DB_PASSWORD;
 let dbHost = process.env.DB_HOST;
 let db = process.env.DB;
 
-
 let config = {};
 
 // This configuration connects to the database in AWS called ' pretslonboardingapptest '
+if (process.env.DATABASE_URL) {
+  const params = url.parse(process.env.DATABASE_URL);
+  const auth = params.auth.split(":");
 
-config = {
-  user: dbUser,
-  password: dbPassword,
-  host: dbHost,
-  port: 5432,
-  database: db,
-  max: 10, // max number of clients in the pool
-  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
-};
+  config = {
+    user: auth[0],
+    password: auth[1],
+    host: params.hostname,
+    port: params.port,
+    database: params.pathname.split("/")[1],
+    ssl: { rejectUnauthorized: false },
+    max: 10, // max number of clients in the pool
+    idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+  };
+} else {
+  config = {
+    user: dbUser,
+    password: dbPassword,
+    host: dbHost,
+    port: 5432,
+    database: db,
+    max: 10, // max number of clients in the pool
+    idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+  };
+}
 
 // this creates the pool that will be shared by all other modules
 const pool = new pg.Pool(config);
