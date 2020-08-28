@@ -79,7 +79,6 @@ function OysterTable(props) {
               <Table.Cell>
                 {curr_month}/{curr_date}/{curr_year}
               </Table.Cell>
-
               <Table.Cell>{inv.original_count}</Table.Cell>
               <Table.Cell>{inv.current_count}</Table.Cell>
               <Table.Cell>{inv.sold}</Table.Cell>

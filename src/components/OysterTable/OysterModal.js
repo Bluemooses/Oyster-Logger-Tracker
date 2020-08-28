@@ -14,8 +14,6 @@ function OysterModal(props) {
     sold: numberSold,
   };
 
-  console.log(updateValues);
-
   return (
     <Modal
       onClose={() => setOpen(false)}

@@ -54,4 +54,8 @@ router.post("/", (req, res) => {
     });
 });
 
+router.put("/update-count/:id", (req, res) => {
+  console.log(req.body);
+});
+
 module.exports = router;
