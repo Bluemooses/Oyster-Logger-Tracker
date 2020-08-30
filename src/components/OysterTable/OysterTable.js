@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import "./OysterTable.css";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { Table } from "semantic-ui-react";
+import { Table, Button } from "semantic-ui-react";
 import OysterModal from "./OysterModal";
+import LastDateUsedModal from "./LastDateUsedModal";
 
 function OysterTable(props) {
   //constants
+  const moment = require("moment");
   const dispatch = useDispatch();
   const inventory = useSelector((redux) => redux.inventory);
 
@@ -67,10 +69,23 @@ function OysterTable(props) {
         let rd_date = rd.getDate();
         let rd_month = rd.getMonth() + 1;
         let rd_year = rd.getFullYear();
-
+        let today = new Date();
+        console.log(today);
+        function comparison(today, rd) {
+          console.log(rd, today);
+          if (today < rd - 7) {
+            console.log("OPE");
+            let response = moment(rd).get("month");
+            console.log(response);
+          } else {
+            console.log("OPE2");
+            let response = moment(rd).get("month", "date");
+            console.log(response);
+          }
+        }
         //begin render
         return (
-          <Table.Body>
+          <Table.Body key={inv.id}>
             <Table.Row>
               <Table.Cell>{inv.oyster_name}</Table.Cell>
               <Table.Cell>
@@ -92,7 +107,23 @@ function OysterTable(props) {
                   curr_year={curr_year}
                   finalOysterSubmit={finalOysterSubmit}
                   inv={inv}
-                ></OysterModal>
+                />
+              </Table.Cell>
+              <Table.Cell collapsing>
+                {" "}
+                <Button onClick={() => comparison(today, rd)}></Button>
+              </Table.Cell>
+              <Table.Cell collapsing>
+                <LastDateUsedModal
+                  rd_month={rd_month}
+                  rd_date={rd_date}
+                  rd_year={rd_year}
+                  curr_month={curr_month}
+                  curr_date={curr_date}
+                  curr_year={curr_year}
+                  finalOysterSubmit={finalOysterSubmit}
+                  inv={inv}
+                />
               </Table.Cell>
             </Table.Row>
           </Table.Body>

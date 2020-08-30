@@ -7,23 +7,23 @@ import { Button, Card, Label, Modal, Form, Input } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 
 function OysterCard(props) {
-  const dispatch = useDispatch();
-
+  //Redux declarations
   const user = useSelector((redux) => redux.user);
+  const dispatch = useDispatch();
+  const oyster = props.oyster;
 
-  let oyster = props.oyster;
+  //State functions
   const [open, setOpen] = useState(false);
   const [oysterCount, setOysterCount] = useState(0);
   const [date, setDate] = useState(new Date());
   const [receivedDate, setReceivedDate] = useState(new Date());
 
+  //Event handlers
   const handleCalendarClose = () => console.log("Calendar closed");
   const handleCalendarOpen = () => console.log("Calendar opened");
 
   function addOyster(oyster) {
-    console.log(date.toUTCString);
-    console.log(date.toISOString);
-    console.log(date.toLocaleString);
+    //Declare oyster to add to inventory
     let oysterObject = {
       ship_date: date.toUTCString(),
       received_date: receivedDate.toUTCString(),
@@ -34,9 +34,11 @@ function OysterCard(props) {
 
     dispatch({ type: "ADD_TO_INVENTORY", payload: oysterObject });
     setOpen(false);
+    //close modal
   }
 
   return (
+    // Card displays data from oyster props
     <Card key={oyster.id}>
       <Card.Content>
         <Card.Header>{oyster.name}</Card.Header>
@@ -47,6 +49,8 @@ function OysterCard(props) {
       </Card.Content>
       <Card.Content>{oyster.description}</Card.Content>
       <Card.Content>
+        {/*  */}
+        {/* Begin modal to handle adding oyster to users inventory */}
         <Modal
           onClose={() => setOpen(false)}
           onOpen={() => setOpen(true)}
@@ -58,6 +62,8 @@ function OysterCard(props) {
           </Modal.Header>
           <Modal.Content image>
             <Modal.Description>
+              {/*  */}
+              {/* Form submit add's oyster -- input fields handle 'Shipping Date', 'Received Date', and 'How Many' */}
               <Form onSubmit={addOyster}>
                 <Form.Field>
                   <Label>Shipping Date</Label>
@@ -79,7 +85,6 @@ function OysterCard(props) {
                     value={receivedDate}
                   />
                 </Form.Field>
-
                 <Form.Field>
                   <Label>How Many</Label>
                   <Input
@@ -106,6 +111,7 @@ function OysterCard(props) {
             />
           </Modal.Actions>
         </Modal>
+        {/* End modal */}
       </Card.Content>
     </Card>
   );

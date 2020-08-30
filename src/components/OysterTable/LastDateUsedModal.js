@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Image, Modal, Input, Label } from "semantic-ui-react";
 
-function OysterModal(props) {
+const LastDateUsedModal = (props) => {
   const [open, setOpen] = useState(false);
   const oysterObject = props.inv;
   const submitLastDateUsed = props.finalOysterSubmit;
@@ -19,7 +19,7 @@ function OysterModal(props) {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button color='linkedin'>Update Oyster Count</Button>}
+      trigger={<Button color="instagram">Submit Last Date Used</Button>}
     >
       <Modal.Header>{oysterObject.oyster_name}</Modal.Header>
       <Modal.Content>
@@ -61,6 +61,6 @@ function OysterModal(props) {
       </Modal.Actions>
     </Modal>
   );
-}
+};
 
-export default OysterModal;
+export default LastDateUsedModal;
