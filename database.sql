@@ -12,6 +12,7 @@ CREATE TABLE "user" (
 CREATE TABLE "oyster_types" (
 	"id" serial NOT NULL,
 	"global_location" BOOLEAN NOT NULL,
+	"geo_location" varchar(250),
 	"name" varchar(1000) NOT NULL UNIQUE,
 	"description" varchar(1000) NOT NULL,
 	CONSTRAINT "oyster_types_pk" PRIMARY KEY ("id")
@@ -28,6 +29,7 @@ CREATE TABLE "inventory" (
 	"ship_date" DATE,
 	"last_date_used" DATE,
 	"original_count" integer NOT NULL,
+	"received_date" DATE, 
 	"previous_count" integer NOT NULL,
 	"current_count" integer NOT NULL,
 	"oyster_name" varchar(255) NOT NULL,
