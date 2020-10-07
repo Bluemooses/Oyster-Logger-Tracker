@@ -29,7 +29,6 @@ function OysterCard(props) {
       received_date: receivedDate.toUTCString(),
       current_count: oysterCount,
       oyster_name: oyster.name,
-      user_id: user.id,
     };
 
     dispatch({ type: "ADD_TO_INVENTORY", payload: oysterObject });

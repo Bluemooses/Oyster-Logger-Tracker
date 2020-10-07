@@ -12,7 +12,6 @@ function InputOyster(props) {
 
   function handleRadio(event) {
     setCoast(event.target.value);
-    console.log(coast);
   }
 
   function addOyster(event) {

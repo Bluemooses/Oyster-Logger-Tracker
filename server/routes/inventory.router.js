@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
   let current_count = req.body.current_count;
   let oyster_name = req.body.oyster_name;
   let previous_count = req.body.current_count;
-  let user_id = req.body.user_id;
+  let user_id = req.user.id;
   let original_count = req.body.current_count;
 
   let queryText = `INSERT INTO inventory (ship_date, received_date, previous_count, current_count, oyster_name, original_count, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7);`;
